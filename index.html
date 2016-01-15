@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5 Templating Demo</title>
+        <style>
+            .template-item-box{
+                height: 200px;
+                border: 2px solid #505050;
+                background-color: rgb(222,222,222);
+            }
+            .align-right{
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <template>
+            <div class="template-item-box">
+                <h1 class="tItemName"></h1>
+                <h2 class="tItemDesc"></h2>
+                <p class="align-right">Quantity ordered: <span class="tQtyOrdered"></span></p>
+            </div>
+        </template>
+        
+        <script>
+            var template = document.querySelector("template");
+            
+            cloneTemplate(template, {tItemName: "Super Cool Surf Board", tItemDesc: "Enjoy your free days", tQtyOrdered: Math.ceil(Math.random()*10)});
+            
+            cloneTemplate(template, {tItemName: "This is another example", tItemDesc: "More Data", tQtyOrdered: 5});
+            
+            cloneTemplate(template, {tItemName: "Try This", tItemDesc: "jejejejejejejeje", tQtyOrdered: 15});
+            
+            function injectTemplate(cloneNode, objData){
+                for(var i in objData){
+                    cloneNode.querySelector("."+i).innerHTML = objData[i];
+                }
+            }
+            
+            function cloneTemplate(template, objData){
+                var clone = document.importNode(template.content, true);
+                injectTemplate(clone, objData);
+                document.body.appendChild(clone);
+            }
+            
+        </script>
+</body>
+</html>
